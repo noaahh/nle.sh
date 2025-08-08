@@ -29,7 +29,7 @@
       display: flex;
       min-height: 100vh;
       flex-direction: column;
-      font: 16px/1.6;
+      font: 16px/1.6 'Charter', 'Bitstream Charter', 'Sitka Text', Cambria, serif;
       background: var(--bg);
       color: var(--fg);
     }
@@ -39,7 +39,7 @@
 
     header.hero { text-align: left; }
     .hero-eyebrow { color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-size: 13px; margin: 0 0 6px; }
-    header.hero h1 { margin: 0 0 10px; font-size: 40px; font-weight: 750; letter-spacing: -0.01em; }
+    header.hero h1 { margin: 0 0 10px; font-size: 40px; font-weight: 700; letter-spacing: -0.005em; }
     .hero p { margin: 0 0 10px; max-width: 60ch; }
 
     nav.links { margin: 16px 0 28px; display: flex; gap: 10px 18px; flex-wrap: wrap; }
@@ -52,6 +52,9 @@
 
     section { margin: 32px 0; }
     section h2 { font-size: 18px; margin-bottom: 8px; color: var(--muted); }
+    
+    section .ach p { margin: 4px 0; }
+    .skills-list p { margin: 3px 0; }
 
     table { width: 100%; border-collapse: collapse; }
     td { vertical-align: top; padding: 10px 0; }
@@ -61,7 +64,6 @@
     .role { font-size: 1.02em; font-weight: 600; margin: 0 0 4px; color: var(--fg); }
     .subtle { color: var(--fg); }
     .ach { margin: 0 0 0 1.05rem; color: var(--fg); }
-    .ach p { margin: 4px 0; }
 
     .meta { color: var(--muted); font-size: 11px; }
 
@@ -77,11 +79,12 @@
       <header class="hero">
         <div class="hero-eyebrow">Hi, I’m</div>
         <h1>Noah Leuenberger</h1>
-        <p>I split my time between research and engineering. At FHNW I work on cognitive computing and practical ways to deploy large language models. Before that, I shipped full-stack features for telecom analytics at Rohde &amp; Schwarz SwissQual.</p>
-        <p>If you care about lean software, data pipelines that don’t fight you, or human-centered tooling, we’ll get along.</p>
+        <p>I split my time between research and engineering. At FHNW I work on cognitive computing and practical ways to deploy large language models. Before that, I shipped full-stack features for telecom analytics at Rohde &amp; Schwarz.</p>
+        <p>I build software that scales without complexity. When systems work together smoothly, from code to production, that's where the real impact happens.</p>
         <nav class="links">
           <a href="https://github.com/noaahh" target="_blank">GitHub</a>
           <a href="https://www.linkedin.com/in/noahleuenberger/" target="_blank">LinkedIn</a>
+          <a href="#" onclick="alert('Digital garden coming soon - currently under construction'); return false;">Digital Garden</a>
         </nav>
         <hr />
       </header>
@@ -95,7 +98,7 @@
               <div class="role">Bachelor’s Thesis <span class="subtle">— Fine-Tuning Pre-Trained ECG and CMR Encoders</span></div>
               <div class="ach">
                 <p>Investigated domain-adaptive fine-tuning of cardiovascular encoders to improve pathological condition identification. Demonstrated that fine-tuning on pathology-rich datasets creates more coherent disease clustering while maintaining demographic robustness.</p>
-                <p>Awarded top mark (6.0/6.0, ECTS Grade A). <a class="inline-link" href="https://github.com/IPOLE-BAT-CMR-ECG/dl-framework">GitHub</a></p>
+                <p>Awarded top mark (6.0/6.0). <a class="inline-link" href="https://github.com/IPOLE-BAT-CMR-ECG/dl-framework">GitHub</a></p>
               </div>
             </td>
           </tr>
@@ -108,7 +111,7 @@
           <tr>
             <td class="date">09/2022 – 04/2025</td>
             <td class="details">
-              <div class="role">BSc Data Science <span class="subtle">— University of Applied Sciences Northwestern Switzerland</span></div>
+              <div class="role"><a class="inline-link" href="https://www.fhnw.ch/en/degree-programmes/computer-science/data-science" target="_blank" rel="noopener">BSc Data Science</a> <span class="subtle">— University of Applied Sciences Northwestern Switzerland</span></div>
               <div class="ach">
                 <p>Specialisation in Machine Learning; applied data analysis and interdisciplinary projects.</p>
                 <p>Graduated with distinction (5.8/6.0, ECTS Grade A).</p>
@@ -131,6 +134,7 @@
               <div class="role">Informatiker EFZ, Application Development <span class="subtle">— GIBS Solothurn</span></div>
               <div class="ach">
                 <p>Federal VET diploma in application development.</p>
+                <p>Graduated with distinction (5.6/6.0).</p>
               </div>
             </td>
           </tr>
@@ -143,7 +147,7 @@
           <tr>
             <td class="date">05/2025 – present</td>
             <td class="details">
-              <div class="role">Research Assistant <span class="subtle">— University of Applied Sciences Northwestern Switzerland</span></div>
+              <div class="role">Research Assistant <span class="subtle">— <a class="inline-link" href="https://www.fhnw.ch/en/about-fhnw/schools/computer-science/institute-for-data-science" target="_blank" rel="noopener">University of Applied Sciences Northwestern Switzerland</a></span></div>
               <div class="ach">
                 <p>Research in Cognitive Computing; practical deployment of large language models in data-driven applications.</p>
                 <p>Worked across disciplines to bridge AI research with real-world implementation.</p>
@@ -153,7 +157,7 @@
           <tr>
             <td class="date">2021 – 04/2025</td>
             <td class="details">
-              <div class="role">Software Engineer <span class="subtle">— Rohde &amp; Schwarz SwissQual AG</span></div>
+              <div class="role">Software Engineer <span class="subtle">— <a class="inline-link" href="https://www.rohde-schwarz.com/us/solutions/critical-infrastructure/mobile-network-testing/mobile-network-testing_231692.html?change_c=true" target="_blank" rel="noopener">Rohde &amp; Schwarz</a></span></div>
               <div class="ach">
                 <p>Led full-stack development of <a class="inline-link" href="https://www.rohde-schwarz.com/uk/solutions/critical-infrastructure/mobile-network-testing/stories-insights/article-smartorchestrator-reduce-opex-with-measurement-campaign-automation_257800.html" target="_blank" rel="noopener">SmartOrchestrator</a>, automating mobile-network measurement campaigns from concept to near-production; Angular, C#/ASP.NET, REST API migration, integration into the R&S Smart platform.</p>
                 <p>Streamlined and implemented a custom analytics module enabling customers to create custom SQL scripts for data-layer interaction, powered by a REST-driven SQL generation engine.</p>
@@ -163,7 +167,7 @@
           <tr>
             <td class="date">2018 – 2021</td>
             <td class="details">
-              <div class="role">Software Engineer Apprentice <span class="subtle">— Rohde &amp; Schwarz SwissQual AG</span></div>
+              <div class="role">Software Engineer Apprentice <span class="subtle">— Rohde &amp; Schwarz</span></div>
               <div class="ach">
                 <p>Contributed to the cloud migration of <a class="inline-link" href="https://www.rohde-schwarz.com/ch-en/knowledge-center/videos/smartanalytics-transform-data-into-actionable-insights-video-detailpage_251220-1087699.html" target="_blank" rel="noopener">SmartAnalytics</a>, refactoring core modules and implementing GraphQL interfaces.</p>
                 <p>Developed internal tools in C#, ASP.NET, Angular, and WPF to support business processes and supply-chain management.</p>
@@ -181,13 +185,26 @@
           </tr>
         </table>
       </section>
+
+      <section>
+        <h2>Skills & Technologies</h2>
+        <div class="ach skills-list">
+          <p>C# / .NET / ASP.NET</p>
+          <p>Python</p>
+          <p>SQL</p>
+          <p>Docker</p>
+          <p>CI/CD pipelines</p>
+          <p>Computer Vision</p>
+          <p>Large Language Models</p>
+        </div>
+      </section>
     </div>
   </main>
 
   <footer>
     <div class="wrap">
       <hr />
-      <div class="footline">© <span id="year"></span> Noah Leuenberger • <span class="meta">Crafted with minimal HTML & CSS in the spirit of simplicity</span></div>
+      <div class="footline">© <span id="year"></span> Noah Leuenberger • <span class="meta">Crafted with minimal HTML & CSS in the <a class="inline-link" href="https://motherfuckingwebsite.com/" target="_blank" rel="noopener">spirit of simplicity</a></span></div>
     </div>
   </footer>
 
