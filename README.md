@@ -1,5 +1,3 @@
-Personal site for Noah Leuenberger.
-
-Minimal HTML & CSS in the spirit of simplicity.
+my personal site.
 
 [nle.sh](https://nle.sh)
