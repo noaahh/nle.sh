@@ -9,121 +9,273 @@
   <meta property="og:description" content="Personal site, portfolio, and link hub." />
   <meta property="og:type" content="website" />
   <meta name="color-scheme" content="light dark" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg: #fcfcfc;
-      --fg: #111;
-      --muted: #666;
-      --link: #6b7280;
-      --border: #e5e5e5;
-      --code: #f5f5f5;
-      --maxw: 780px;
+      --bg: #f9f8f4;
+      --fg: #2a2a2a;
+      --muted: #6e6e6e;
+      --link: #2a2a2a;
+      --link-decoration: #b0b0b0;
+      --accent-border: #e0ded9;
+      --code-bg: #f1efeb;
+      --maxw: 680px;
+      
+      --font-serif: 'Lora', 'Georgia', serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     }
+
     @media (prefers-color-scheme: dark) {
-      :root { --bg: #0c0c0c; --fg: #eaeaea; --muted: #a0a0a0; --link: #9aa3b2; --border: #222; --code: #121212; }
+      :root {
+        --bg: #1c1c1c; 
+        --fg: #e6e6e6;
+        --muted: #888;
+        --link: #e6e6e6;
+        --link-decoration: #555;
+        --accent-border: #333;
+        --code-bg: #2a2a2a;
+      }
     }
 
     html, body { height: 100%; }
+    
     body {
       margin: 0;
       display: flex;
       min-height: 100vh;
       flex-direction: column;
-      font: 16px/1.6 'Charter', 'Bitstream Charter', 'Sitka Text', Cambria, serif;
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
       background: var(--bg);
       color: var(--fg);
     }
+
     main { flex: 1 0 auto; }
 
-    .wrap { max-width: var(--maxw); margin: 48px auto; padding: 0 16px; }
+    .wrap { 
+      max-width: var(--maxw); 
+      margin: 64px auto 64px;
+      padding: 0 24px; 
+    }
 
-    header.hero { text-align: left; }
-    .hero-eyebrow { color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-size: 13px; margin: 0 0 6px; }
-    header.hero h1 { margin: 0 0 10px; font-size: 40px; font-weight: 700; letter-spacing: -0.005em; }
-    .hero p { margin: 0 0 10px; max-width: 60ch; }
+    h1, h2, h3 {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      color: var(--fg);
+    }
 
-    nav.links { margin: 16px 0 28px; display: flex; gap: 10px 18px; flex-wrap: wrap; }
-    nav.links a, a.navlink { color: var(--link); text-decoration: none; padding: 4px 8px; border-radius: 4px; transition: background 0.2s; }
-    nav.links a:hover, a.navlink:hover { text-decoration: underline; }
-    a.inline-link { color: var(--link); text-decoration: none; }
-    a.inline-link:hover { text-decoration: underline; }
-
-    hr { border: 0; border-top: 1px solid var(--border); margin: 24px 0; }
-
-    section { margin: 32px 0; }
-    section h2 { font-size: 18px; margin-bottom: 8px; color: var(--muted); }
+    header.hero { text-align: left; margin-bottom: 48px; }
     
-    section .ach p { margin: 4px 0; }
-    .skills-list p { margin: 3px 0; }
+    .hero-eyebrow { 
+      font-family: var(--font-sans);
+      color: var(--muted); 
+      font-size: 13px; 
+      margin: 0 0 12px; 
+      letter-spacing: 0.05em;
+    }
 
-    table { width: 100%; border-collapse: collapse; }
-    td { vertical-align: top; padding: 10px 0; }
-    td.date { width: 170px; color: var(--muted); font-size: 14px; white-space: nowrap; padding-right: 16px; }
-    td.details { border-top: 1px dashed var(--border); }
-    tr:first-child td.details { border-top: 0; }
-    .role { font-size: 1.02em; font-weight: 600; margin: 0 0 4px; color: var(--fg); }
-    .subtle { color: var(--fg); }
-    .ach { margin: 0 0 0 1.05rem; color: var(--fg); }
+    header.hero h1 { 
+      margin: 0 0 24px; 
+      font-size: 48px; 
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
 
-    .meta { color: var(--muted); font-size: 11px; }
+    .hero-intro-wrapper {
+      border-left: 3px solid #e2e0dc;
+      padding-left: 20px;
+      margin-bottom: 32px;
+    }
 
-    footer { flex-shrink: 0; position: sticky; bottom: 0; background: var(--bg); }
-    footer .wrap { margin: 8px auto 12px; }
-    footer .footline { text-align: center; color: var(--muted); font-size: 13px; }
-    footer hr { margin: 8px 0; }
+    @media (prefers-color-scheme: dark) {
+        .hero-intro-wrapper { border-left-color: #333; }
+    }
+
+    .hero p { 
+      margin: 0; 
+      max-width: 60ch; 
+      font-size: 17px;
+    }
+    
+    .hero-note {
+        font-family: var(--font-serif);
+        font-style: italic;
+        color: var(--muted);
+        margin-bottom: 16px;
+        display: block;
+    }
+
+    a { 
+      color: var(--link); 
+      text-decoration: underline;
+      text-decoration-color: var(--link-decoration); 
+      text-underline-offset: 4px;
+      transition: text-decoration-color 0.2s;
+    }
+    
+    a:hover { 
+      text-decoration-color: var(--fg); 
+      color: var(--fg);
+    }
+
+    nav.links { 
+      margin: 28px 0 0; 
+      display: flex; 
+      gap: 16px; 
+      flex-wrap: wrap; 
+      font-size: 14px;
+    }
+    
+    nav.links a {
+        text-decoration-style: solid;
+        color: var(--muted);
+    }
+    
+    nav.links a:hover {
+        color: var(--fg);
+    }
+
+    hr { 
+      border: 0; 
+      border-top: 1px solid var(--accent-border); 
+      margin: 48px 0; 
+    }
+
+    section { margin: 48px 0; }
+    
+    section h2 { 
+      font-size: 28px; 
+      margin-bottom: 24px; 
+      margin-top: 0;
+      color: var(--fg);
+      letter-spacing: -0.01em;
+    }
+
+    .custom-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .custom-list li {
+        margin-bottom: 12px;
+        position: relative;
+        padding-left: 20px;
+    }
+    
+    .custom-list li::before {
+        content: ">";
+        position: absolute;
+        left: 0;
+        color: var(--muted);
+        font-family: monospace;
+    }
+
+    .item-title {
+        font-weight: 500;
+        color: var(--fg);
+    }
+
+    .item-desc {
+        color: var(--muted);
+        font-size: 0.95em;
+        margin-top: 2px;
+        display: block;
+    }
+
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 12px;
+    }
+    
+    .skills-grid span {
+        font-size: 15px;
+        color: var(--fg);
+    }
+    
+    .skills-grid span::before {
+        content: "— ";
+        color: var(--muted);
+        opacity: 0.5;
+    }
+
+    footer { flex-shrink: 0; position: sticky; bottom: 0; background: var(--bg); padding-bottom: 24px; }
+    footer .wrap { margin: 0 auto; padding-top: 12px; }
+    footer .footline { color: var(--muted); font-size: 13px; font-family: var(--font-sans); }
+
   </style>
 </head>
 <body>
   <main>
     <div class="wrap">
+      
       <header class="hero">
-        <div class="hero-eyebrow">Hi, I'm</div>
         <h1>Noah Leuenberger</h1>
-        <p>I build reliable systems from end to end. My approach is rooted in clear architecture and holistic design, ensuring that what I build is robust, scalable, and production-ready. Currently, I'm applying this engineering mindset to the practical deployment of LLMs at <a class="inline-link" href="https://www.fhnw.ch/en/about-fhnw/schools/computer-science/institute-for-data-science" target="_blank" rel="noopener">FHNW</a>. Before that, I shipped full-stack features for telecom analytics at <a class="inline-link" href="https://www.rohde-schwarz.com" target="_blank" rel="noopener">Rohde &amp; Schwarz</a>.</p>
+        
+        <div class="hero-intro-wrapper">
+          <span class="hero-note">Software Engineering & Research</span>
+          <p>I build reliable systems from end to end. My approach is rooted in clear architecture and holistic design, ensuring that what I build is robust, scalable, and production-ready.</p>
+          <br>
+          <p>Currently, I'm applying this engineering mindset to the practical deployment of LLMs at <a href="https://www.fhnw.ch/en/about-fhnw/schools/computer-science/institute-for-data-science" target="_blank" rel="noopener">FHNW</a>. Before that, I shipped full-stack features for telecom analytics at <a href="https://www.rohde-schwarz.com" target="_blank" rel="noopener">Rohde &amp; Schwarz</a>.</p>
+        </div>
+
         <nav class="links">
           <a href="https://github.com/noaahh" target="_blank" rel="noopener">GitHub</a>
           <a href="https://www.linkedin.com/in/noahleuenberger/" target="_blank" rel="noopener">LinkedIn</a>
           <a href="https://noaahh.github.io/cv/main.pdf" target="_blank" rel="noopener">CV</a>
           <a href="#" onclick="alert('Digital garden coming soon — currently under construction'); return false;">Digital Garden</a>
         </nav>
-        <hr />
       </header>
+
+      <hr />
 
       <section>
         <h2>Selected Work</h2>
-        <div class="ach">
-          <p><strong><a class="inline-link" href="https://github.com/IPOLE-BAT-CMR-ECG/dl-framework" target="_blank" rel="noopener">Cardiovascular Diagnostics (Thesis)</a></strong> — Engineered a modular pipeline for a deep learning thesis, creating a repeatable system for evaluating and fine-tuning medical imaging encoders for robust pathological clustering.</p>
-          
-          <p><strong><a class="inline-link" href="https://www.rohde-schwarz.com/ch/loesungen/critical-infrastructure/mobile-network-testing/stories-insights/article-smartorchestrator-reduce-opex-with-measurement-campaign-automation_257800.html" target="_blank" rel="noopener">SmartOrchestrator</a></strong> — Architected and built an end-to-end platform for automating mobile-network testing. Led the development from the C#/.NET backend and REST APIs to the Angular frontend, integrating with the core R&S platform.</p>
-          
-          <p><strong><a class="inline-link" href="https://www.rohde-schwarz.com/ch-en/knowledge-center/videos/smartanalytics-transform-data-into-actionable-insights-video-detailpage_251220-1087699.html" target="_blank" rel="noopener">SmartAnalytics</a></strong> — Developed the 'Custom Scripts' feature, a tool that empowers users to generate complex SQL queries interactively. Contributed to the system's cloud migration by implementing GraphQL interfaces and refactoring key modules.</p>
-
-        </div>
+        <ul class="custom-list">
+          <li>
+            <a class="item-title" href="https://github.com/IPOLE-BAT-CMR-ECG/dl-framework" target="_blank" rel="noopener">Cardiovascular Diagnostics (Thesis)</a>
+            <span class="item-desc">Engineered a modular pipeline for deep learning, creating a repeatable system for evaluating medical imaging encoders.</span>
+          </li>
+          <li>
+            <a class="item-title" href="https://www.rohde-schwarz.com/ch/loesungen/critical-infrastructure/mobile-network-testing/stories-insights/article-smartorchestrator-reduce-opex-with-measurement-campaign-automation_257800.html" target="_blank" rel="noopener">SmartOrchestrator</a>
+            <span class="item-desc">Architected an end-to-end platform for automating mobile-network testing, from C# backend to Angular frontend.</span>
+          </li>
+          <li>
+            <a class="item-title" href="https://www.rohde-schwarz.com/ch-en/knowledge-center/videos/smartanalytics-transform-data-into-actionable-insights-video-detailpage_251220-1087699.html" target="_blank" rel="noopener">SmartAnalytics</a>
+            <span class="item-desc">Developed 'Custom Scripts' for complex SQL generation and contributed to cloud migration via GraphQL interfaces.</span>
+          </li>
+        </ul>
       </section>
 
       <section>
         <h2>Skills & Technologies</h2>
-        <div class="ach skills-list">
-          <p>C# / .NET / ASP.NET</p>
-          <p>Python</p>
-          <p>JavaScript / TypeScript</p>
-          <p>Angular</p>
-          <p>SQL / PostgreSQL</p>
-          <p>Docker</p>
-          <p>REST APIs / GraphQL</p>
-          <p>CI/CD pipelines</p>
-          <p>Machine Learning / PyTorch</p>
-          <p>Large Language Models</p>
-          <p>Computer Vision</p>
+        <div class="skills-grid">
+          <span>C# / .NET</span>
+          <span>Python</span>
+          <span>TypeScript</span>
+          <span>Angular</span>
+          <span>PostgreSQL</span>
+          <span>Docker</span>
+          <span>GraphQL</span>
+          <span>CI/CD</span>
+          <span>PyTorch</span>
+          <span>LLMs</span>
         </div>
       </section>
+
     </div>
   </main>
 
   <footer>
     <div class="wrap">
-      <hr />
-      <div class="footline">© <span id="year"></span> Noah Leuenberger </div>
+      <hr style="margin: 0 0 16px 0;" />
+      <div class="footline">© <span id="year"></span> Noah Leuenberger</div>
     </div>
   </footer>
 
