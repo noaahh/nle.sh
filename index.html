@@ -12,7 +12,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -21,23 +21,21 @@
       --muted: #6e6e6e;
       --link: #2a2a2a;
       --link-decoration: #b0b0b0;
-      --accent-border: #e0ded9;
-      --code-bg: #f1efeb;
-      --maxw: 680px;
+      --accent-border: #d4d2cd;
+      --maxw: 700px;
       
-      --font-serif: 'Lora', 'Georgia', serif;
-      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      --font-serif: 'Lora', serif;
+      --font-sans: 'Inter', sans-serif;
     }
 
     @media (prefers-color-scheme: dark) {
       :root {
         --bg: #1c1c1c; 
         --fg: #e6e6e6;
-        --muted: #888;
+        --muted: #999;
         --link: #e6e6e6;
         --link-decoration: #555;
-        --accent-border: #333;
-        --code-bg: #2a2a2a;
+        --accent-border: #444;
       }
     }
 
@@ -50,112 +48,138 @@
       flex-direction: column;
       font-family: var(--font-sans);
       font-size: 16px;
-      line-height: 1.6;
+      line-height: 1.65;
       background: var(--bg);
       color: var(--fg);
+      -webkit-font-smoothing: antialiased;
     }
 
     main { flex: 1 0 auto; }
 
     .wrap { 
       max-width: var(--maxw); 
-      margin: 64px auto 64px;
+      margin: 0 auto;
       padding: 0 24px; 
     }
 
-    h1, h2, h3 {
-      font-family: var(--font-serif);
-      font-weight: 400;
-      color: var(--fg);
+    /* --- Header / Navbar --- */
+    .site-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 64px;
+        margin-bottom: 80px;
+        font-family: var(--font-sans);
     }
 
-    header.hero { text-align: left; margin-bottom: 48px; }
-    
-    .hero-eyebrow { 
-      font-family: var(--font-sans);
-      color: var(--muted); 
-      font-size: 13px; 
-      margin: 0 0 12px; 
-      letter-spacing: 0.05em;
-    }
-
-    header.hero h1 { 
-      margin: 0 0 24px; 
-      font-size: 48px; 
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-    }
-
-    .hero-intro-wrapper {
-      border-left: 3px solid #e2e0dc;
-      padding-left: 20px;
-      margin-bottom: 32px;
-    }
-
-    @media (prefers-color-scheme: dark) {
-        .hero-intro-wrapper { border-left-color: #333; }
-    }
-
-    .hero p { 
-      margin: 0; 
-      max-width: 60ch; 
-      font-size: 17px;
-    }
-    
-    .hero-note {
+    .site-branding {
         font-family: var(--font-serif);
-        font-style: italic;
-        color: var(--muted);
-        margin-bottom: 16px;
-        display: block;
+        font-weight: 600;
+        font-size: 1.25rem;
+        color: var(--fg);
+        text-decoration: none;
+        letter-spacing: -0.01em;
     }
 
-    a { 
-      color: var(--link); 
-      text-decoration: underline;
-      text-decoration-color: var(--link-decoration); 
-      text-underline-offset: 4px;
-      transition: text-decoration-color 0.2s;
-    }
-    
-    a:hover { 
-      text-decoration-color: var(--fg); 
-      color: var(--fg);
+    .site-nav {
+        display: flex;
+        gap: 24px;
+        font-size: 0.95rem;
+        font-weight: 500;
     }
 
-    nav.links { 
-      margin: 28px 0 0; 
-      display: flex; 
-      gap: 16px; 
-      flex-wrap: wrap; 
-      font-size: 14px;
-    }
-    
-    nav.links a {
-        text-decoration-style: solid;
+    .site-nav a {
         color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s;
     }
-    
-    nav.links a:hover {
+
+    .site-nav a:hover, .site-nav a.active {
         color: var(--fg);
     }
 
+    /* --- Intro Section --- */
+    .intro-section {
+        margin-bottom: 64px;
+    }
+
+    .intro-text p { 
+        margin: 0 0 16px; 
+        max-width: 60ch; 
+        color: var(--muted); /* Slightly softer text for reading */
+        font-size: 1.05rem;
+    }
+    
+    .intro-text p:last-child { margin-bottom: 0; }
+    
+    .intro-text a {
+        color: var(--fg);
+        text-decoration: underline;
+        text-decoration-color: var(--link-decoration);
+        text-underline-offset: 3px;
+        transition: all 0.2s;
+    }
+
+    .intro-text a:hover {
+        text-decoration-color: var(--fg);
+        background-color: rgba(0,0,0,0.03);
+    }
+    
+    @media (prefers-color-scheme: dark) {
+        .intro-text a:hover { background-color: rgba(255,255,255,0.05); }
+    }
+
+    /* Social Links (below intro) */
+    .social-links { 
+        margin-top: 24px;
+        display: flex; 
+        gap: 16px; 
+        font-size: 14px;
+        font-weight: 500;
+    }
+    
+    .social-links a {
+        color: var(--muted);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+    }
+    
+    .social-links a:hover {
+        color: var(--fg);
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 4px;
+    }
+
+    .social-links a::after {
+        content: "↗";
+        font-size: 0.8em;
+        margin-left: 3px;
+        opacity: 0.5;
+    }
+
+    /* --- Separator --- */
     hr { 
       border: 0; 
       border-top: 1px solid var(--accent-border); 
-      margin: 48px 0; 
+      margin: 64px 0; 
+      opacity: 0.6;
     }
 
-    section { margin: 48px 0; }
+    /* --- Sections --- */
+    section { margin: 64px 0; }
     
     section h2 { 
-      font-size: 28px; 
-      margin-bottom: 24px; 
+      font-family: var(--font-serif);
+      font-size: 1.5rem; 
+      font-weight: 500;
+      margin-bottom: 32px; 
       margin-top: 0;
       color: var(--fg);
-      letter-spacing: -0.01em;
     }
 
+    /* --- List items --- */
     .custom-list {
         list-style: none;
         padding: 0;
@@ -163,75 +187,89 @@
     }
     
     .custom-list li {
-        margin-bottom: 12px;
-        position: relative;
-        padding-left: 20px;
+        margin-bottom: 28px;
     }
-    
-    .custom-list li::before {
-        content: ">";
-        position: absolute;
-        left: 0;
-        color: var(--muted);
-        font-family: monospace;
+
+    .item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 6px;
     }
 
     .item-title {
-        font-weight: 500;
+        font-family: var(--font-sans);
+        font-weight: 600;
         color: var(--fg);
+        text-decoration: none;
+        font-size: 1.05rem;
+    }
+    
+    .item-title:hover {
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 4px;
     }
 
     .item-desc {
         color: var(--muted);
-        font-size: 0.95em;
-        margin-top: 2px;
+        font-size: 0.95rem;
         display: block;
+        line-height: 1.6;
     }
 
+    /* --- Skills --- */
     .skills-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 12px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 12px;
     }
     
     .skills-grid span {
-        font-size: 15px;
+        font-size: 14px;
         color: var(--fg);
-    }
-    
-    .skills-grid span::before {
-        content: "— ";
-        color: var(--muted);
-        opacity: 0.5;
+        font-family: var(--font-sans);
+        background: var(--code-bg);
+        padding: 4px 10px;
+        border-radius: 4px;
     }
 
-    footer { flex-shrink: 0; position: sticky; bottom: 0; background: var(--bg); padding-bottom: 24px; }
-    footer .wrap { margin: 0 auto; padding-top: 12px; }
-    footer .footline { color: var(--muted); font-size: 13px; font-family: var(--font-sans); }
-
+    /* --- Footer --- */
+    footer { 
+        flex-shrink: 0; 
+        padding-bottom: 48px; 
+        text-align: left;
+    }
+    footer .wrap { padding-top: 0; }
+    footer .footline { color: var(--muted); font-size: 13px; opacity: 0.7; }
   </style>
 </head>
 <body>
-  <main>
-    <div class="wrap">
-      
-      <header class="hero">
-        <h1>Noah Leuenberger</h1>
+  
+  <div class="wrap">
+    <header class="site-header">
+      <div class="site-branding">Noah Leuenberger</div>
+      <nav class="site-nav">
+        <a href="#" class="active">Index</a>
+        <a href="#" onclick="alert('Digital garden coming soon.'); return false;">Digital Garden</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="intro-section">
         
-        <div class="hero-intro-wrapper">
-          <span class="hero-note">Software Engineering & Research</span>
-          <p>I build reliable systems from end to end. My approach is rooted in clear architecture and holistic design, ensuring that what I build is robust, scalable, and production-ready.</p>
-          <br>
-          <p>Currently, I'm applying this engineering mindset to the practical deployment of LLMs at <a href="https://www.fhnw.ch/en/about-fhnw/schools/computer-science/institute-for-data-science" target="_blank" rel="noopener">FHNW</a>. Before that, I shipped full-stack features for telecom analytics at <a href="https://www.rohde-schwarz.com" target="_blank" rel="noopener">Rohde &amp; Schwarz</a>.</p>
+        <div class="intro-text">
+            <p>I build reliable systems from end to end. My approach is rooted in clear architecture and holistic design, ensuring that what I build is robust, scalable, and production-ready.</p>
+            <br>
+            <p>Currently, I'm applying this engineering mindset to the practical deployment of LLMs at <a href="https://www.fhnw.ch/en/about-fhnw/schools/computer-science/institute-for-data-science" target="_blank" rel="noopener">FHNW</a>. Before that, I shipped full-stack features for telecom analytics at <a href="https://www.rohde-schwarz.com" target="_blank" rel="noopener">Rohde &amp; Schwarz</a>.</p>
         </div>
 
-        <nav class="links">
+        <nav class="social-links">
           <a href="https://github.com/noaahh" target="_blank" rel="noopener">GitHub</a>
           <a href="https://www.linkedin.com/in/noahleuenberger/" target="_blank" rel="noopener">LinkedIn</a>
           <a href="https://noaahh.github.io/cv/main.pdf" target="_blank" rel="noopener">CV</a>
-          <a href="#" onclick="alert('Digital garden coming soon — currently under construction'); return false;">Digital Garden</a>
         </nav>
-      </header>
+      </div>
 
       <hr />
 
@@ -239,15 +277,21 @@
         <h2>Selected Work</h2>
         <ul class="custom-list">
           <li>
-            <a class="item-title" href="https://github.com/IPOLE-BAT-CMR-ECG/dl-framework" target="_blank" rel="noopener">Cardiovascular Diagnostics (Thesis)</a>
+            <div class="item-header">
+                <a class="item-title" href="https://github.com/IPOLE-BAT-CMR-ECG/dl-framework" target="_blank" rel="noopener">Cardiovascular Diagnostics (Thesis)</a>
+            </div>
             <span class="item-desc">Engineered a modular pipeline for deep learning, creating a repeatable system for evaluating medical imaging encoders.</span>
           </li>
           <li>
-            <a class="item-title" href="https://www.rohde-schwarz.com/ch/loesungen/critical-infrastructure/mobile-network-testing/stories-insights/article-smartorchestrator-reduce-opex-with-measurement-campaign-automation_257800.html" target="_blank" rel="noopener">SmartOrchestrator</a>
+            <div class="item-header">
+                <a class="item-title" href="https://www.rohde-schwarz.com/ch/loesungen/critical-infrastructure/mobile-network-testing/stories-insights/article-smartorchestrator-reduce-opex-with-measurement-campaign-automation_257800.html" target="_blank" rel="noopener">SmartOrchestrator</a>
+            </div>
             <span class="item-desc">Architected an end-to-end platform for automating mobile-network testing, from C# backend to Angular frontend.</span>
           </li>
           <li>
-            <a class="item-title" href="https://www.rohde-schwarz.com/ch-en/knowledge-center/videos/smartanalytics-transform-data-into-actionable-insights-video-detailpage_251220-1087699.html" target="_blank" rel="noopener">SmartAnalytics</a>
+            <div class="item-header">
+                <a class="item-title" href="https://www.rohde-schwarz.com/ch-en/knowledge-center/videos/smartanalytics-transform-data-into-actionable-insights-video-detailpage_251220-1087699.html" target="_blank" rel="noopener">SmartAnalytics</a>
+            </div>
             <span class="item-desc">Developed 'Custom Scripts' for complex SQL generation and contributed to cloud migration via GraphQL interfaces.</span>
           </li>
         </ul>
@@ -269,16 +313,16 @@
         </div>
       </section>
 
-    </div>
-  </main>
+    </main>
 
-  <footer>
-    <div class="wrap">
-      <hr style="margin: 0 0 16px 0;" />
+    <footer>
       <div class="footline">© <span id="year"></span> Noah Leuenberger</div>
-    </div>
-  </footer>
+    </footer>
 
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
