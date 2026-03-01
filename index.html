@@ -16,26 +16,28 @@
 
   <style>
     :root {
-      --bg: #f9f8f4;
-      --fg: #2a2a2a;
-      --muted: #6e6e6e;
-      --link: #2a2a2a;
-      --link-decoration: #b0b0b0;
-      --accent-border: #d4d2cd;
+      --bg: #FFFCF0;        /* flexoki paper */
+      --fg: #282726;        /* flexoki base-900 */
+      --muted: #6F6E69;     /* flexoki base-600 */
+      --link: #282726;
+      --link-decoration: #B7B5AC;  /* flexoki base-300 */
+      --accent-border: #CECDC3;    /* flexoki base-200 */
+      --code-bg: #F2F0E5;          /* flexoki base-50 */
       --maxw: 700px;
-      
+
       --font-serif: 'Lora', serif;
       --font-sans: 'Inter', sans-serif;
     }
 
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #1c1c1c; 
-        --fg: #e6e6e6;
-        --muted: #999;
-        --link: #e6e6e6;
-        --link-decoration: #555;
-        --accent-border: #444;
+        --bg: #1C1B1A;        /* flexoki base-950 */
+        --fg: #E6E4D9;        /* flexoki base-100 */
+        --muted: #878580;     /* flexoki base-500 */
+        --link: #E6E4D9;
+        --link-decoration: #575653;  /* flexoki base-700 */
+        --accent-border: #403E3C;    /* flexoki base-800 */
+        --code-bg: #282726;          /* flexoki base-900 */
       }
     }
 
@@ -122,11 +124,11 @@
 
     .intro-text a:hover {
         text-decoration-color: var(--fg);
-        background-color: rgba(0,0,0,0.03);
+        background-color: #E6E4D9;  /* flexoki base-100 */
     }
-    
+
     @media (prefers-color-scheme: dark) {
-        .intro-text a:hover { background-color: rgba(255,255,255,0.05); }
+        .intro-text a:hover { background-color: #282726; }  /* flexoki base-900 */
     }
 
     /* Social Links (below intro) */
