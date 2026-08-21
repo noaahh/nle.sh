@@ -4,334 +4,286 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Noah Leuenberger</title>
-  <meta name="description" content="Noah Leuenberger — Software Engineer" />
+  <meta name="description" content="Noah Leuenberger, data engineer in Switzerland." />
   <meta property="og:title" content="Noah Leuenberger" />
-  <meta property="og:description" content="Personal site, portfolio, and link hub." />
+  <meta property="og:description" content="Noah Leuenberger, data engineer in Switzerland." />
   <meta property="og:type" content="website" />
   <meta name="color-scheme" content="light dark" />
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #FFFCF0;        /* flexoki paper */
-      --fg: #282726;        /* flexoki base-900 */
-      --muted: #6F6E69;     /* flexoki base-600 */
-      --link: #282726;
-      --link-decoration: #B7B5AC;  /* flexoki base-300 */
-      --accent-border: #CECDC3;    /* flexoki base-200 */
-      --code-bg: #F2F0E5;          /* flexoki base-50 */
-      --maxw: 700px;
-
-      --font-serif: 'Lora', serif;
-      --font-sans: 'Inter', sans-serif;
+      --paper: #FFFCF0;   /* flexoki paper */
+      --ink:   #100F0F;   /* flexoki black */
+      --faint: #6F6E69;   /* flexoki base-600 */
+      --red:   #AF3029;   /* flexoki red-600 */
     }
 
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #1C1B1A;        /* flexoki base-950 */
-        --fg: #E6E4D9;        /* flexoki base-100 */
-        --muted: #878580;     /* flexoki base-500 */
-        --link: #E6E4D9;
-        --link-decoration: #575653;  /* flexoki base-700 */
-        --accent-border: #403E3C;    /* flexoki base-800 */
-        --code-bg: #282726;          /* flexoki base-900 */
+        --paper: #100F0F;
+        --ink:   #CECDC3; /* flexoki base-200 */
+        --faint: #878580; /* flexoki base-500 */
+        --red:   #D14D41; /* flexoki red-400 */
       }
     }
 
-    html, body { height: 100%; }
-    
     body {
-      margin: 0;
-      display: flex;
-      min-height: 100vh;
-      flex-direction: column;
-      font-family: var(--font-sans);
-      font-size: 16px;
-      line-height: 1.65;
-      background: var(--bg);
-      color: var(--fg);
-      -webkit-font-smoothing: antialiased;
-    }
-
-    main { flex: 1 0 auto; }
-
-    .wrap { 
-      max-width: var(--maxw); 
+      background: var(--paper);
+      color: var(--ink);
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      max-width: 66ch;
       margin: 0 auto;
-      padding: 0 24px; 
+      padding: 3rem 1.25rem 4rem;
     }
 
-    /* --- Header / Navbar --- */
-    .site-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 64px;
-        margin-bottom: 80px;
-        font-family: var(--font-sans);
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.25rem 1.5rem;
+      margin-bottom: 2.5rem;
     }
 
-    .site-branding {
-        font-family: var(--font-serif);
-        font-weight: 600;
-        font-size: 1.25rem;
-        color: var(--fg);
-        text-decoration: none;
-        letter-spacing: -0.01em;
+    h1 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 0;
     }
 
-    .site-nav {
-        display: flex;
-        gap: 24px;
-        font-size: 0.95rem;
-        font-weight: 500;
+    nav a { margin-left: 1.25ch; }
+    nav a:first-child { margin-left: 0; }
+
+    p { margin: 1rem 0; }
+
+    ul {
+      padding-left: 2ch;
+      margin: 1rem 0;
+    }
+    li { margin: 0.25rem 0; }
+    ul ul { margin: 0.25rem 0; }
+
+    a {
+      color: var(--red);
+      text-decoration: underline;
+      text-underline-offset: 2px;
     }
 
-    .site-nav a {
-        color: var(--muted);
-        text-decoration: none;
-        transition: color 0.2s;
+    a:focus-visible {
+      outline: 2px solid var(--red);
+      outline-offset: 2px;
     }
 
-    .site-nav a:hover, .site-nav a.active {
-        color: var(--fg);
+    .faint { color: var(--faint); }
+
+    pre {
+      color: var(--faint);
+      font-size: 11px;
+      line-height: 1.25;
+      margin: 0;
+      overflow-x: auto;
+      cursor: crosshair;
+      touch-action: pan-y;
     }
 
-    /* --- Intro Section --- */
-    .intro-section {
-        margin-bottom: 64px;
+    .profile {
+      position: relative;
+      margin-top: 4rem;
     }
 
-    .intro-text p { 
-        margin: 0 0 16px; 
-        max-width: 60ch; 
-        color: var(--muted); /* Slightly softer text for reading */
-        font-size: 1.05rem;
-    }
-    
-    .intro-text p:last-child { margin-bottom: 0; }
-    
-    .intro-text a {
-        color: var(--fg);
-        text-decoration: underline;
-        text-decoration-color: var(--link-decoration);
-        text-underline-offset: 3px;
-        transition: all 0.2s;
+    .profile .hairline {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--red);
+      display: none;
+      pointer-events: none;
     }
 
-    .intro-text a:hover {
-        text-decoration-color: var(--fg);
-        background-color: #E6E4D9;  /* flexoki base-100 */
+    .profile .readout,
+    .summit {
+      color: var(--red);
     }
 
-    @media (prefers-color-scheme: dark) {
-        .intro-text a:hover { background-color: #282726; }  /* flexoki base-900 */
+    .profile .readout {
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: 11px;
+      display: none;
+      pointer-events: none;
     }
 
-    /* Social Links (below intro) */
-    .social-links { 
-        margin-top: 24px;
-        display: flex; 
-        gap: 16px; 
-        font-size: 14px;
-        font-weight: 500;
-    }
-    
-    .social-links a {
-        color: var(--muted);
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-    }
-    
-    .social-links a:hover {
-        color: var(--fg);
-        text-decoration: underline;
-        text-decoration-thickness: 1px;
-        text-underline-offset: 4px;
-    }
+    figure { margin: 0; }
 
-    .social-links a::after {
-        content: "↗";
-        font-size: 0.8em;
-        margin-left: 3px;
-        opacity: 0.5;
+    figcaption {
+      color: var(--faint);
+      font-size: 10px;
+      margin-top: 0.5rem;
     }
-
-    /* --- Separator --- */
-    hr { 
-      border: 0; 
-      border-top: 1px solid var(--accent-border); 
-      margin: 64px 0; 
-      opacity: 0.6;
-    }
-
-    /* --- Sections --- */
-    section { margin: 64px 0; }
-    
-    section h2 { 
-      font-family: var(--font-serif);
-      font-size: 1.5rem; 
-      font-weight: 500;
-      margin-bottom: 32px; 
-      margin-top: 0;
-      color: var(--fg);
-    }
-
-    /* --- List items --- */
-    .custom-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    
-    .custom-list li {
-        margin-bottom: 28px;
-    }
-
-    .item-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        margin-bottom: 6px;
-    }
-
-    .item-title {
-        font-family: var(--font-sans);
-        font-weight: 500;
-        color: var(--fg);
-        text-decoration: none;
-        font-size: 1.05rem;
-    }
-    
-    .item-title:hover {
-        text-decoration: underline;
-        text-decoration-thickness: 1px;
-        text-underline-offset: 4px;
-    }
-
-    .item-desc {
-        color: var(--muted);
-        font-size: 0.95rem;
-        display: block;
-        line-height: 1.6;
-    }
-
-    /* --- Skills --- */
-    .skills-grid {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px 12px;
-    }
-    
-    .skills-grid span {
-        font-size: 14px;
-        color: var(--fg);
-        font-family: var(--font-sans);
-        background: var(--code-bg);
-        padding: 4px 10px;
-        border-radius: 4px;
-    }
-
-    /* --- Footer --- */
-    footer { 
-        flex-shrink: 0; 
-        padding-bottom: 48px; 
-        text-align: left;
-    }
-    footer .wrap { padding-top: 0; }
-    footer .footline { color: var(--muted); font-size: 13px; opacity: 0.7; }
   </style>
 </head>
 <body>
-  
-  <div class="wrap">
-    <header class="site-header">
-      <a href="index.html" class="site-branding">Noah Leuenberger</a>
-      <nav class="site-nav">
-        <a href="#" onclick="alert('Digital garden coming soon.'); return false;">Digital Garden</a>
-      </nav>
-    </header>
 
-    <main>
-      <div class="intro-section">
-        <div class="intro-text">
-          <p>I build reliable systems from end to end. My approach is rooted in clear architecture and holistic design, ensuring that what I build is robust, scalable, and production-ready.</p>
-          <br>
-          <p>
-            Currently, I work as a Data Engineer at
-            <a href="https://chmedia.ch/" target="_blank" rel="noopener">CH Media</a>.
-            Previously, I applied this engineering mindset to practical NLP methods and language-focused systems at the
-            <a href="https://www.fhnw.ch/en/about-fhnw/schools/computer-science/institute-for-data-science" target="_blank" rel="noopener">
-              Institute for Data Science @ FHNW
-            </a>,
-            and before that shipped full-stack features for telecom analytics at
-            <a href="https://www.rohde-schwarz.com" target="_blank" rel="noopener">Rohde &amp; Schwarz</a>.
-          </p>
-        </div>
+  <header>
+    <h1>Noah Leuenberger</h1>
+    <nav>
+      <a href="https://github.com/noaahh" target="_blank" rel="noopener">github</a>
+      <a href="https://www.strava.com/athletes/35095830" target="_blank" rel="noopener">strava</a>
+      <a href="https://noaahh.github.io/cv/main.pdf" target="_blank" rel="noopener">cv</a>
+    </nav>
+  </header>
 
-        <nav class="social-links">
-          <a href="https://github.com/noaahh" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://www.linkedin.com/in/noahleuenberger/" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://noaahh.github.io/cv/main.pdf" target="_blank" rel="noopener">CV</a>
-        </nav>
+  <main>
+    <p>
+      I'm a data engineer at <a href="https://chmedia.ch/" target="_blank" rel="noopener">CH Media</a>
+      in Aarau. Before that I did applied NLP at the
+      <a href="https://www.fhnw.ch/en/about-fhnw/schools/computer-science/institute-for-data-science" target="_blank" rel="noopener">Institute for Data Science at FHNW</a>,
+      and before that I shipped full-stack telecom analytics at
+      <a href="https://www.rohde-schwarz.com" target="_blank" rel="noopener">Rohde &amp; Schwarz</a>.
+    </p>
+
+    <p>
+      Weekends happen outside, on gravel roads and ridgelines, mostly
+      to find my limits and move them. The quiet days are for cortados,
+      the loud ones for making the stadium louder.
+    </p>
+
+    <p>Some things I've built:</p>
+    <ul>
+      <li><a href="https://github.com/IPOLE-BAT-CMR-ECG/dl-framework" target="_blank" rel="noopener">Fine-Tuning ECG &amp; CMR Encoders</a>, my bachelor thesis: a modular deep learning pipeline for cardiovascular diagnostics</li>
+      <li><a href="https://www.rohde-schwarz.com/ch/loesungen/critical-infrastructure/mobile-network-testing/stories-insights/article-smartorchestrator-reduce-opex-with-measurement-campaign-automation_257800.html" target="_blank" rel="noopener">SmartOrchestrator</a>, an end-to-end platform that automates mobile-network measurement campaigns</li>
+      <li><a href="https://www.rohde-schwarz.com/ch-en/knowledge-center/videos/smartanalytics-transform-data-into-actionable-insights-video-detailpage_251220-1087699.html" target="_blank" rel="noopener">SmartAnalytics</a>, where I built a custom SQL scripting engine and helped move the product to the cloud</li>
+    </ul>
+
+    <p>Off the clock:</p>
+    <ul>
+      <li><a href="https://turbine.so/" target="_blank" rel="noopener">Turbine</a>, the autopilot for your calendar</li>
+      <li><a href="https://github.com/noaahh/billett" target="_blank" rel="noopener">billett</a>, a self-hosted journey log for Swiss public transport</li>
+      <li><a href="https://github.com/noaahh/38-0-ch" target="_blank" rel="noopener">38-0-ch</a>, a Swiss Super League draft game</li>
+    </ul>
+
+    <p>Some things I believe:</p>
+    <ul>
+      <li>Design for the life you have, not the one in your feed</li>
+      <li>Never drop to zero</li>
+      <li>AI made code cheap. It did not make judgment cheap</li>
+      <li>Understanding is not agreement</li>
+      <li>Not every decision deserves the last 3%</li>
+    </ul>
+
+    <p>
+      I keep meaning to start a digital garden.
+      <span class="faint">There is nothing there yet.</span>
+    </p>
+
+    <figure>
+      <div class="profile"
+           data-km="16.746"
+           data-prof="[2028,2032,2038,2026,2021,2012,2002,1992,1996,2013,2030,2047,2058,2060,2058,2054,2062,2086,2125,2159,2184,2204,2222,2245,2271,2305,2342,2385,2430,2467,2493,2507,2516,2531,2552,2581,2594,2571,2523,2462,2417,2372,2330,2301,2289,2295,2301,2302,2296,2291,2293,2293,2283,2262,2233,2218]"
+           data-bpm="[120,131,109,112,130,141,111,132,117,143,137,142,130,123,128,126,127,154,160,143,134,145,146,134,154,139,147,149,154,146,134,138,131,135,140,138,153,113,108,107,110,114,112,113,119,109,108,107,95,103,114,114,100,98,96,98]">
+        <div class="hairline" aria-hidden="true"></div>
+        <div class="readout" aria-hidden="true"></div>
+      <pre aria-hidden="true">
+                                   <span class="summit">+ 2616 m</span>
+                                   __
+                               ___/ .\
+                             _/ . . . \
+                           _/.. . . . .\
+                          /.... . . .   \_
+                        _/..... . . . .   \_________
+                     __/....... . . .               \___
+                   _/ ......... . . . .
+                 _/.. ......... . . .
+___       ______/ ... ......... . . . .
+.  \_____/. .   . ... ......... . . .
+'---------------'----------------'---------------'------
+0               5                10              15 km</pre>
       </div>
-
-      <hr />
-
-      <section>
-        <h2>Selected Work</h2>
-        <ul class="custom-list">
-          <li>
-            <div class="item-header">
-                <a class="item-title" href="https://github.com/IPOLE-BAT-CMR-ECG/dl-framework" target="_blank" rel="noopener">Cardiovascular Diagnostics (Thesis)</a>
-            </div>
-            <span class="item-desc">Engineered a modular pipeline for deep learning, creating a repeatable system for evaluating medical imaging encoders.</span>
-          </li>
-          <li>
-            <div class="item-header">
-                <a class="item-title" href="https://www.rohde-schwarz.com/ch/loesungen/critical-infrastructure/mobile-network-testing/stories-insights/article-smartorchestrator-reduce-opex-with-measurement-campaign-automation_257800.html" target="_blank" rel="noopener">SmartOrchestrator</a>
-            </div>
-            <span class="item-desc">Architected an end-to-end platform for automating mobile-network testing, from C# backend to Angular frontend.</span>
-          </li>
-          <li>
-            <div class="item-header">
-                <a class="item-title" href="https://www.rohde-schwarz.com/ch-en/knowledge-center/videos/smartanalytics-transform-data-into-actionable-insights-video-detailpage_251220-1087699.html" target="_blank" rel="noopener">SmartAnalytics</a>
-            </div>
-            <span class="item-desc">Developed 'Custom Scripts' for complex SQL generation and contributed to cloud migration via GraphQL interfaces.</span>
-          </li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Skills & Technologies</h2>
-        <div class="skills-grid">
-          <span>C# / .NET</span>
-          <span>Python</span>
-          <span>TypeScript</span>
-          <span>Angular</span>
-          <span>PostgreSQL</span>
-          <span>Docker</span>
-          <span>GraphQL</span>
-          <span>CI/CD</span>
-          <span>PyTorch</span>
-          <span>LLMs</span>
-        </div>
-      </section>
-
-    </main>
-
-    <footer>
-      <div class="footline">© <span id="year"></span> Noah Leuenberger</div>
-    </footer>
-
-  </div>
+      <figcaption>Schynige Platte to First, over the Faulhorn. 16.7&nbsp;km, about 930&nbsp;m of climbing. Drawn from my watch's barometer, 1 August 2026.</figcaption>
+    </figure>
+  </main>
 
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // each .profile carries its data as attributes: altitude and heart rate
+    // per art column, total distance in km. tools/profile.py generates them.
+    document.querySelectorAll('.profile').forEach((wrap) => {
+      const prof = JSON.parse(wrap.dataset.prof);
+      const bpm = wrap.dataset.bpm ? JSON.parse(wrap.dataset.bpm) : null;
+      const KM = parseFloat(wrap.dataset.km);
+      const W = prof.length;
+      const pre = wrap.querySelector('pre');
+      const hair = wrap.querySelector('.hairline');
+      const out = wrap.querySelector('.readout');
+      let charW = 0;
+      let replay = null;
+
+      const measure = () => {
+        const s = document.createElement('span');
+        s.textContent = '0'.repeat(W);
+        s.style.cssText = 'position:absolute;visibility:hidden;white-space:pre';
+        pre.appendChild(s);
+        charW = s.getBoundingClientRect().width / W;
+        s.remove();
+      };
+
+      const show = (col) => {
+        hair.style.left = ((col + 0.5) * charW - pre.scrollLeft) + 'px';
+        hair.style.display = 'block';
+        out.textContent = ((col + 0.5) / W * KM).toFixed(1) + ' km · ' + prof[col] + ' m'
+          + (bpm ? ' · ' + bpm[col] + ' bpm' : '');
+        out.style.display = 'block';
+      };
+
+      const hide = () => {
+        hair.style.display = 'none';
+        out.style.display = 'none';
+      };
+
+      const endReplay = () => {
+        if (replay) cancelAnimationFrame(replay);
+        replay = null;
+        pre.style.clipPath = '';
+        hide();
+      };
+
+      // replay the recording once: the pen sweeps, the curve draws in behind it
+      const startReplay = () => {
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        measure();
+        const D = 2800;
+        const artW = W * charW;
+        const t0 = performance.now();
+        pre.style.clipPath = 'inset(0 100% 0 0)';
+        const tick = (t) => {
+          if (!replay) return;
+          const p = Math.min(1, (t - t0) / D);
+          const x = p * artW;
+          pre.style.clipPath = 'inset(0 ' + Math.max(0, pre.clientWidth - x) + 'px 0 0)';
+          show(Math.min(W - 1, Math.floor(x / charW)));
+          if (p < 1) replay = requestAnimationFrame(tick);
+          else endReplay();
+        };
+        replay = requestAnimationFrame(tick);
+      };
+
+      const move = (e) => {
+        if (replay) endReplay();
+        if (!charW) measure();
+        const left = pre.getBoundingClientRect().left - pre.scrollLeft;
+        show(Math.max(0, Math.min(W - 1, Math.floor((e.clientX - left) / charW))));
+      };
+
+      pre.addEventListener('pointermove', move);
+      pre.addEventListener('pointerdown', move);
+      pre.addEventListener('pointerleave', () => { if (!replay) hide(); });
+      addEventListener('resize', () => { charW = 0; });
+      startReplay();
+    });
   </script>
+
 </body>
 </html>
