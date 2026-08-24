@@ -27,6 +27,16 @@
       }
     }
 
+    @font-face {
+      font-family: "Suisse Intl Local";
+      src: local("Suisse Int'l Medium"),
+           local("Suisse Intl Medium"),
+           local("SuisseIntl-Medium");
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+    }
+
     body {
       background: var(--paper);
       color: var(--ink);
@@ -48,8 +58,10 @@
     }
 
     h1 {
+      font-family: "Suisse Intl Local", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 1.2rem;
-      font-weight: 700;
+      font-weight: 500;
+      letter-spacing: -0.02em;
       margin: 0;
     }
 
