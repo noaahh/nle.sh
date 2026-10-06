@@ -8,7 +8,7 @@
 Reads distance, altitude, and heart rate from a FIT file and prints:
   - the ASCII art (elevation curve, heart-rate dither fill, summit cross,
     km axis) to paste into the <pre> block
-  - the prof/bpm/KM values to paste into the inline script
+  - the data attributes to paste onto the .profile div (read by profile.js)
   - summary stats for the figcaption
 
 Usage:
