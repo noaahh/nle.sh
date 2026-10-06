@@ -1,7 +1,7 @@
 #!/usr/bin/env -S uv run --script
 # /// script
 # requires-python = ">=3.11"
-# dependencies = ["garmin-fit-sdk"]
+# dependencies = ["garmin-fit-sdk", "pillow"]
 # ///
 """Render a FIT activity as the ASCII elevation profile used on nle.sh.
 
@@ -15,12 +15,17 @@ Usage:
   uv run tools/profile.py activity.fit
   uv run tools/profile.py activity.fit --width 56 --height 11
   uv run tools/profile.py activity.fit --hr-zones 143,130,115
+  uv run tools/profile.py activity.fit --terrain   # also emit data-dem/data-route
 """
 
 import argparse
+import base64
+import io
 import json
+import math
 import statistics
 import sys
+import urllib.request
 
 from garmin_fit_sdk import Decoder, Stream
 
@@ -29,7 +34,8 @@ def load_series(path):
     messages, errors = Decoder(Stream.from_file(path)).read(convert_datetimes_to_dates=False)
     if errors:
         print(f"warning: decoder reported {len(errors)} error(s)", file=sys.stderr)
-    dist, alt, hr = [], [], []
+    dist, alt, hr, pos = [], [], [], []
+    k = 180 / 2**31
     for r in messages.get("record_mesgs", []):
         d = r.get("distance")
         a = r.get("enhanced_altitude", r.get("altitude"))
@@ -38,9 +44,61 @@ def load_series(path):
         dist.append(d)
         alt.append(a)
         hr.append(r.get("heart_rate"))
+        la, lo = r.get("position_lat"), r.get("position_long")
+        pos.append((la * k, lo * k) if la is not None and lo is not None else None)
     if not dist:
         sys.exit("no usable records in FIT file")
-    return dist, alt, hr
+    return dist, alt, hr, pos
+
+
+def terrain(dist, pos, n_route, gw=160, margin_km=2.5, zoom=14):
+    """Heightmap around the track from AWS Terrarium tiles, plus the track in grid coords.
+
+    Returns (dem bytes gw*gh quantized to 0..255, lo_m, hi_m, gh, cell_m, route [(gx, gy), ...]).
+    """
+    from PIL import Image
+
+    pts = [(d, p) for d, p in zip(dist, pos) if p]
+    lats = [p[0] for _, p in pts]
+    lons = [p[1] for _, p in pts]
+    dlat = margin_km / 111.32
+    dlon = margin_km / (111.32 * math.cos(math.radians(statistics.mean(lats))))
+    s, n = min(lats) - dlat, max(lats) + dlat
+    w, e = min(lons) - dlon, max(lons) + dlon
+    km_x = (e - w) * 111.32 * math.cos(math.radians((s + n) / 2))
+    km_y = (n - s) * 111.32
+    gh = round(gw * km_y / km_x)
+
+    def px(lat, lon):  # global web-mercator pixel at `zoom`
+        z = 256 * 2**zoom
+        y = math.log(math.tan(math.pi / 4 + math.radians(lat) / 2))
+        return (lon + 180) / 360 * z, (1 - y / math.pi) / 2 * z
+
+    tiles = {}
+
+    def elev(lat, lon):
+        x, y = px(lat, lon)
+        tx, ty = int(x // 256), int(y // 256)
+        if (tx, ty) not in tiles:
+            url = f"https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{zoom}/{tx}/{ty}.png"
+            with urllib.request.urlopen(url) as r:
+                tiles[tx, ty] = Image.open(io.BytesIO(r.read())).convert("RGB")
+        rr, g, b = tiles[tx, ty].getpixel((int(x) % 256, int(y) % 256))
+        return rr * 256 + g + b / 256 - 32768
+
+    hs = [elev(n - (n - s) * j / (gh - 1), w + (e - w) * i / (gw - 1)) for j in range(gh) for i in range(gw)]
+    lo, hi = min(hs), max(hs)
+    dem = bytes(round((h - lo) / (hi - lo) * 255) for h in hs)
+
+    total = pts[-1][0]
+    route, j = [], 0
+    for c in range(n_route):
+        target = (c + 0.5) / n_route * total
+        while j < len(pts) - 1 and pts[j][0] < target:
+            j += 1
+        la, lon = pts[j][1]
+        route.append((round((lon - w) / (e - w) * (gw - 1), 1), round((n - la) / (n - s) * (gh - 1), 1)))
+    return dem, lo, hi, gh, km_x * 1000 / (gw - 1), route
 
 
 def resample(dist, values, width):
@@ -107,10 +165,11 @@ def main():
     ap.add_argument("--width", type=int, default=56, help="columns (default 56)")
     ap.add_argument("--height", type=int, default=11, help="rows for the curve (default 11)")
     ap.add_argument("--hr-zones", help="override dither thresholds as solid,checker,sparse bpm")
+    ap.add_argument("--terrain", action="store_true", help="also emit the 3D terrain heightmap and route (fetches DEM tiles)")
     args = ap.parse_args()
     W, H = args.width, args.height
 
-    dist, alt, hr = load_series(args.fit)
+    dist, alt, hr, pos = load_series(args.fit)
     total_km = dist[-1] / 1000
 
     prof = smooth(resample(dist, alt, W), 1)
@@ -166,6 +225,11 @@ def main():
     print(f'data-prof="{json.dumps([round(p) for p in prof], separators=(",", ":"))}"')
     if have_hr:
         print(f'data-bpm="{json.dumps([round(b) for b in bpm], separators=(",", ":"))}"')
+    if args.terrain:
+        # four route points per art column, so column c sits at route[4c + 2]
+        dem, lo, hi, gh, cell_m, route = terrain(dist, pos, W * 4)
+        print(f'data-dem="{len(dem) // gh},{gh},{round(lo)},{round(hi)},{round(cell_m)},{base64.b64encode(dem).decode()}"')
+        print(f'data-route="{json.dumps([v for p in route for v in p], separators=(",", ":"))}"')
 
 
 if __name__ == "__main__":
