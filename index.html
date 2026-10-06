@@ -92,7 +92,7 @@
       text-underline-offset: 2px;
     }
 
-    a:focus-visible {
+    :is(a, canvas):focus-visible {
       outline: 2px solid var(--red);
       outline-offset: 2px;
     }
@@ -149,10 +149,13 @@
       display: block;
       width: 100%;
       cursor: grab;
-      touch-action: pan-y;
+      touch-action: none;
     }
 
     .terrain:active { cursor: grabbing; }
+
+    .terrain-hint { display: block; margin-top: 0.4rem; }
+    .terrain-source { margin-left: 0.6em; color: inherit; }
 
     .terrain + .profile {
       margin: 0 auto;
@@ -226,8 +229,8 @@
       <span class="faint">There is nothing there yet.</span>
     </p>
 
-    <figure>
-      <canvas class="terrain" aria-hidden="true"></canvas>
+    <figure data-terrain-src="terrain/schynige-platte.json">
+      <canvas class="terrain" tabindex="0" role="img" aria-label="Interactive relief of the walk from Schynige Platte to First. Press Enter to unfold a contour map. Arrow keys turn the view, shift and arrow keys move it, plus and minus zoom, and Home resets it."></canvas>
       <div class="profile"
            data-km="16.746"
            data-prof="[2028,2032,2038,2026,2021,2012,2002,1992,1996,2013,2030,2047,2058,2060,2058,2054,2062,2086,2125,2159,2184,2204,2222,2245,2271,2305,2342,2385,2430,2467,2493,2507,2516,2531,2552,2581,2594,2571,2523,2462,2417,2372,2330,2301,2289,2295,2301,2302,2296,2291,2293,2293,2283,2262,2233,2218]"
@@ -248,7 +251,7 @@ __________/ .   ............... . . .       .
 '---------------'----------------'---------------'------
 0               5                10              15 km</pre>
       </div>
-      <figcaption>Schynige Platte to First, over the Faulhorn. 16.7&nbsp;km, about 930&nbsp;m of climbing. Drawn from my watch's barometer, 1 August 2026.</figcaption>
+      <figcaption>Schynige Platte to First, over the Faulhorn. 16.7&nbsp;km, about 930&nbsp;m of climbing. Profile from my watch's barometer, 1 August 2026.<span class="terrain-hint">drag to turn · click to unfold</span></figcaption>
     </figure>
   </main>
 
